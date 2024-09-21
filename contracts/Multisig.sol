@@ -82,5 +82,34 @@ contract MultiSigWallet {
         }
     }
 
+    function deposit() external payable {
+        emit Deposit(msg.sender, msg.value, address(this).balance);
+    }
+
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value, address(this).balance);
+    }
+
+    function getOwners() external view returns(address[] memory) {
+        return owners;
+    }
+
+    function getWithdrawTxCount() external view returns(uint) {
+        return withdrawals.length;
+    }
+
+    function getWithdrawTxes() external view returns(WithdrawTx[] memory) {
+        return withdrawals;
+    }
+
+    function getWithdrawTx(uint txnIndex) external view transactionExists(txnIndex) returns(address, uint, uint, bool) {
+        WithdrawTx memory withdrawTx = withdrawals[txnIndex];
+        return (withdrawTx.to, withdrawTx.amount, withdrawTx.approvals, withdrawTx.sent);
+    }
+
+    function balanceOf() external view returns(uint) {
+        return address(this).balance;
+    }
+
    
 }
