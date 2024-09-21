@@ -5,7 +5,7 @@ require("solidity-coverage");
 require("hardhat-gas-reporter");
 require("@nomicfoundation/hardhat-verify");
 
-YOUR_PRIVATE_KEY = process.env.PRIVATE_KEY;
+YOUR_PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
